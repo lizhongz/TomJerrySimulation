@@ -12,56 +12,93 @@
 
 using namespace std;
 
-// Probability that animal will go a position.
-// From positive position to negative position
-#define S1_POS_PROB_A	0.45
-#define S1_POS_PROB_B	0.45
-#define S1_POS_PROB_C	0.05
-#define S1_POS_PROB_D	0.025
-#define S1_POS_PROB_E	0.025
-#define S2_POS_PROB_A	0.8
-#define S2_POS_PROB_B	0.1
-#define S2_POS_PROB_C	0.04
-#define S2_POS_PROB_D	0.04
-#define S2_POS_PROB_E	0.02
-
-
-// Probability that animal will go to a position
-typedef struct
-{
-	int		x;
-	int		y;
-	float	prob;
-}PosProb;
+//! Define common attributes and behavior of cat and mouse agent 
 
 class Animal: public Agent
 {
 protected:
-	int energy;		// Energy affect how many movement animal can do
-	int view;		// The range that animal can see
+	int energy; //! Energy affect how many movement animal can do
+	int view;   //! The range that animal can see
 	
 public:
-	Animal(string name, int energy, 
-		Agent *((& map)[MAP_W][MAP_L]), int view, int x, int y, void * agMng);
+	//! Constructor member fuction
+	Animal(string name, int energy, Agent *((& map)[MAP_W][MAP_L]), int view, int x, int y, void * agMng);
 
+	//! Deconstructor member fuction
 	virtual ~Animal();
 
+	//! Moving towards a given position
+	/*!
+ 	  \param x x coordinate 
+	  \param y y coordinate
+	  \return 0, if next position is the objective positon
+	  \return -1, else 
+	*/
 	int  moveTowards(const int tx, const int ty);
-	void calcDir(const int tx, const int ty, Coordinate & dir);
-	void findPossPositons(const Coordinate & dirCoor, 
-						  const Coordinate & objCoor, 
-						  vector <PosProb> & posVec);
-	void calcPosProb(const Coordinate & posCoor, 
-					 const Coordinate & objCoor, 
-					 vector <PosProb> & posVec, 
-					 const float prob, 
-					 const float collProb);
-	void randPos(const vector <PosProb> & posVec, Coordinate & coord);
-	Agent* choose(vector <Agent *> &agents);
-	void wander();
-	void getViewBound(int &ub, int &db, int &lb, int &rb);
-	void getClosedEmpPoss(vector <Coordinate> &emps);
 
+	//! Calculating the direction of the objective
+	/*!
+ 	  \param x x coordinate of objective
+	  \param y y coordinate of objective
+	  \param dir the direction calculated by this function
+	*/
+	void calcDir(const int tx, const int ty, Coordinate & dir);
+
+	//! Finding next possible position for moving towards and calculate the probability distribution
+	/*!
+ 	  \param dirCoor Moving direction
+	  \param objCoor Coordinate of objective
+	  \param posVec List of possible positions
+	*/
+	void findPossPositons(const Coordinate & dirCoor, 
+			      const Coordinate & objCoor, 
+			      vector <PosProb> & posVec);
+
+	//! Adjust the probability of a possible position
+	/*!
+ 	  \param posCoor Coordinate of the possible position
+	  \param objCoor Coordinate of objective
+	  \param posVec Push the possible possition and ajusted probability to this vector
+	  \param prob Original probalibility
+	  \param collProb Collective probability 
+	*/
+	void calcPosProb(const Coordinate & posCoor, 
+			 const Coordinate & objCoor, 
+			 vector <PosProb> & posVec, 
+			 const float prob, 
+			 const float collProb);
+
+	//! According to the probability distribution, randomly generate a position
+	/*!
+	  \param posVec Probability distribution of possible next positions
+ 	  \param posCoor Coordinate of next position 
+	*/
+	void randPos(const vector <PosProb> & posVec, Coordinate & coord);
+
+	//! Calculate the probability distribution and andomly choose an agent as objective 
+	/*!
+ 	  \param agents Possible objective agent list 
+	  \return Chosen agent
+	*/
+	Agent* choose(vector <Agent *> &agents);
+
+	//! Randomly moving, each possible position has same probability
+	void wander();
+
+	//! Calculate view bound
+	/*!
+ 	  \param ub up bound 
+ 	  \param db down bound 
+ 	  \param lb left bound 
+ 	  \param rb right bound 
+	*/
+	void getViewBound(int &ub, int &db, int &lb, int &rb);
+
+	//! Finding the empty positon in animal's view
+	/*!
+ 	  \param emps Empty position list 
+	*/
+	void getClosedEmpPoss(vector <Coordinate> &emps);
 };
 
 

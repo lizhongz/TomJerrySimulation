@@ -24,4 +24,25 @@
 // Obstacle config info
 #define OBSTACLE_NAME	"obstacle"
 
+// Probability that animal will go a position.
+// From positive position to negative position
+#define S1_POS_PROB_A	0.45
+#define S1_POS_PROB_B	0.45
+#define S1_POS_PROB_C	0.05
+#define S1_POS_PROB_D	0.025
+#define S1_POS_PROB_E	0.025
+#define S2_POS_PROB_A	0.8
+#define S2_POS_PROB_B	0.1
+#define S2_POS_PROB_C	0.04
+#define S2_POS_PROB_D	0.04
+#define S2_POS_PROB_E	0.02
+
+//! A position and its robability that animal will go to
+typedef struct
+{
+	int		x;
+	int		y;
+	float	prob;
+}PosProb;
+
 #endif

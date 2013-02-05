@@ -2,22 +2,28 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#if !defined(AFX_COORDINATE_H__9AD535D5_6AC8_4675_8D56_102178E61D8A__INCLUDED_)
-#define AFX_COORDINATE_H__9AD535D5_6AC8_4675_8D56_102178E61D8A__INCLUDED_
+#ifndef _COORDINATE_H_
+#define _COORDINATE_H_
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
+//! Position in a 2 dimention map
 class Coordinate  
 {
 public:
+	//! Constructor
+	/*!
+	  \param x x coordinate value
+	  \param y y coordinate value
+	*/
 	Coordinate(int x, int y);
+
+	//! Default constructor
 	Coordinate();
+
+	//! Deconstructor
 	virtual ~Coordinate();
 
-	int x;
-	int y;
+	int x; //! x coordinate value
+	int y; //! y coordinate value
 };
 
-#endif // !defined(AFX_COORDINATE_H__9AD535D5_6AC8_4675_8D56_102178E61D8A__INCLUDED_)
+#endif 

@@ -11,17 +11,38 @@
 
 using namespace std;
 
+//! Maintain a agent list to manage agents
 class AgentManager
 {
 private:
-	Agent *((& map)[MAP_W][MAP_L]);	// Reference of map
+	//! Reference of map
+	Agent *((& map)[MAP_W][MAP_L]);
 public:
-	list <Agent *> agentList; // Agent list
+	//! Agent list
+	list <Agent *> agentList;
 
+	//! Constructor
+	/*!
+	  \param map 
+	*/
 	AgentManager(Agent *((& map)[MAP_W][MAP_L]));
+
+	//! Deconstructor
 	virtual ~AgentManager();
+
+	//! Register a new agent
+	/*!
+	  \param agent new agent
+	*/
 	void agentRegister(Agent * agent);
+
+	//! Deregister an agent
+	/*!
+	  \param agent the pointer of the agent
+	*/
 	void agentDeregister(Agent *agent);
+
+	//! Clear all the agents in agent list
 	void clearAgents();
 };
 

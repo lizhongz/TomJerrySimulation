@@ -9,6 +9,8 @@
 
 using namespace std;
 
+//! Define the behaviors of mouse agent
+
 class Mouse: public Animal
 {
 public:

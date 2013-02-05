@@ -221,7 +221,7 @@ void Animal::findPossPositons(const Coordinate & dirCoor, const Coordinate & obj
 	}
 }
 
-// Calculate posibility for a give position for animal to move to
+//! Adjust the probability of a possible position
 void Animal::calcPosProb(const Coordinate & posCoor, const Coordinate & objCoor, 
 						 vector <PosProb> & posVec, const float prob, const float collProb)
 {
@@ -269,7 +269,7 @@ void Animal::calcPosProb(const Coordinate & posCoor, const Coordinate & objCoor,
 	}
 }
 
-// Choose an agent as objective from an agent list 
+// Randomly choose an agent as objective from an agent list 
 Agent* Animal::choose(vector <Agent *> &agents)
 {
 	// Distances from this animal to other agents
@@ -291,7 +291,7 @@ Agent* Animal::choose(vector <Agent *> &agents)
 		sum += (1.0 / dst);
 	}
 
-	// Calculate choosed probability distribution of each agent
+	// Calculate choosed probability distribution
 	prob = 0;
 	for(int i = 0; i < dsts.size(); i++)
 	{

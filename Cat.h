@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//! Define the behaviors of cat agent
 class Cat: public Animal
 {
 public:
