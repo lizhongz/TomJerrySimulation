@@ -11,7 +11,7 @@ class Coordinate
 public:
 	//! Constructor
 	/*!
-	  \param x x coordinate value
+	  \param x x coordinate
 	  \param y y coordinate value
 	*/
 	Coordinate(int x, int y);
