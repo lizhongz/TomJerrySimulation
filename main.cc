@@ -6,8 +6,9 @@
 #include "Cheese.h"
 #include "Obstacle.h"
 #include "AgentManager.h"
+#include "mt19937ar.h"
 
-void init();
+void initMap();
 void printMap(Agent *((& map)[MAP_W][MAP_L]));
 void newMouse(int x, int y);
 void newCat(int x, int y);
@@ -26,7 +27,7 @@ int main()
 	list <Agent *>::iterator itrt;
 
 	// Initialize the map and create agents
-	init();
+	initMap();
 
 	while(flag != 'q')
 	{		
@@ -60,32 +61,32 @@ int main()
 }
 
 // Initialize the map and create agents
-void init()
+void initMap()
 {
-	// Create cheese
-	newCheese(2, 2);
-	newCheese(3, 8);
-	newCheese(6, 9);
+	int agentNum[4] = {MOUSE_NUM, CAT_NUM, 
+		CHEESE_NUM, OBSTACLE_NUM};
+	void (*fun[4])(int x, int y) = {newMouse, newCat,
+		 newCheese, newObstacle};
+	int x;
+	int y;
 
-	// Create Mouses
-	newMouse(1, 1);
-	newMouse(5, 5);
-	newMouse(1, 1);
-	newMouse(3, 5);
-	newMouse(7, 7);
-	newMouse(7, 9);
-	
-	// Create Cats
-	newCat(8, 6);
-	newCat(8, 0);
-
-	// Create Obstacles 
-	newObstacle(3, 0);
-	newObstacle(3, 1);
-	newObstacle(3, 2);
-	newObstacle(3, 3);
-	newObstacle(2, 3);
-	newObstacle(0, 3);
+	// Create Obstacle
+	for(int j = 0; j < 4; j++)
+	{
+		for(int i = 0; i < agentNum[j]; i++)
+		{
+			x = genrand_real1() * MAP_W;
+			y = genrand_real1() * MAP_W;
+			
+			while(map[x][y] != NULL)
+			{	
+				x = genrand_real1() * MAP_W;
+				y = genrand_real1() * MAP_W;
+			}
+        
+			(*fun[j])(x, y);
+		}
+	}
 }
 
 // Create a mouse

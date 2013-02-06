@@ -5,8 +5,14 @@
 #define _CONFIG_H_
 
 // Map config info
-#define MAP_W	10	// map width
-#define MAP_L	10	// map length
+#define MAP_W	50	// map width
+#define MAP_L	50	// map length
+
+// Number of agents
+#define MOUSE_NUM 	(MAP_W / 2)
+#define CAT_NUM 	(MAP_W / 10)
+#define CHEESE_NUM 	(MAP_W / 1)
+#define OBSTACLE_NUM	(MAP_W / 1)	
 
 // Mouse config info
 #define MOUSE_NAME	"mouse"

@@ -14,8 +14,7 @@ using namespace std;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-Animal::Animal(string name, int energy, 
-		Agent *((& map)[MAP_W][MAP_L]), int view, int x, int y, void * agMng)
+Animal::Animal(string name, int energy, Agent *((& map)[MAP_W][MAP_L]), int view, int x, int y, void * agMng)
 		: Agent(name, map, x, y, agMng)
 {
 	this->energy	= energy;
